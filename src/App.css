@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.App .board {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.square {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+}
+
+.square.black {
+  background: #000;
+}
+
+.square.clicked {
+  background: #00FF00;
+}
+
+.circle {
+  background: #00FF00;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.obstacle {
+  background: #ff0000;
+  width: 100%;
+  height: 100%;
+}
