@@ -44,6 +44,17 @@
         animation-duration: .2s;
         animation-iteration-count: infinite;
       }
+
+      &.destroy-after {
+        animation-name: destroyObstacle;
+        animation-duration: .5s;
+        animation-iteration-count: infinite;
+      }
+      &.destroy-third {
+        animation-name: destroyObstacle;
+        animation-duration: .9s;
+        animation-iteration-count: infinite;
+      }
     }
 
     .gameover-text {

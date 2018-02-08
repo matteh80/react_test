@@ -30,6 +30,14 @@
         animation-name: destroyObstacle;
         animation-duration: .2s;
         animation-iteration-count: infinite; }
+      .App .board .obstacle.destroy-after {
+        animation-name: destroyObstacle;
+        animation-duration: .5s;
+        animation-iteration-count: infinite; }
+      .App .board .obstacle.destroy-third {
+        animation-name: destroyObstacle;
+        animation-duration: .9s;
+        animation-iteration-count: infinite; }
     .App .board .gameover-text {
       position: absolute;
       width: 100%;
