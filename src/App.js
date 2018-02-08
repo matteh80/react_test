@@ -12,16 +12,40 @@ class App extends Component {
       obstacles: [],
       counter: 0,
       options: {
+        difficulty: 'Medium',
         trailSize: 7,
-        numObstacles: 25
+        numObstacles: 20
       },
       gameover: false
     }
 
     this.handleSquareClick = this.handleSquareClick.bind(this)
     this.getValidMoves = this.getValidMoves.bind(this)
-    this.handleObstaclesChange = this.handleObstaclesChange.bind(this)
-    this.handleTrailChange = this.handleTrailChange.bind(this)
+    this.handleDifficultyChange = this.handleDifficultyChange.bind(this)
+    this.reset = this.reset.bind(this)
+  }
+
+  componentDidMount() {
+    let { circlePosition } = this.state
+    let [circleX, circleY] = circlePosition[0]
+    let newPosX = circleX
+    let newPosY = circleY
+    let _this = this
+
+    window.onkeydown = function (e) {
+      let code = e.keyCode ? e.keyCode : e.which;
+      if (code === 38) { //up key
+        newPosY = newPosY - 1
+      } else if (code === 40) { //down key
+        newPosY = newPosY + 1
+      } else if (code === 39) { //right
+        newPosX = newPosX + 1
+      } else if (code === 37) { //left
+        newPosX = newPosX - 1
+      }
+
+      _this.handleSquareClick(newPosX, newPosY)
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -147,24 +171,56 @@ class App extends Component {
       </div>
     )
   }
+  
+  handleDifficultyChange(e) {
+    let level = e.target.value
+    let newOptions
+    switch (level) {
+      case 'Easy':
+        newOptions = {
+          difficulty: level,
+          numObstacles: 15,
+          trailSize: 5
+        }
+        break
+      case 'Medium':
+        newOptions = {
+          difficulty: level,
+          numObstacles: 20,
+          trailSize: 7
+        }
+        break
+      case 'Hard':
+        newOptions = {
+          difficulty: level,
+          numObstacles: 23,
+          trailSize: 9
+        }
+        break
+      case 'Insane':
+        newOptions = {
+          difficulty: level,
+          numObstacles: 27,
+          trailSize: 11
+        }
+        break
+    }
 
-  handleObstaclesChange(e) {
-    const newOptions = update(this.state.options, {
-      numObstacles: { $set: e.target.value }
-    })
 
     this.setState({
-      options: newOptions
+      options: update(this.state.options, {
+        $set: newOptions
+      })
     })
   }
 
-  handleTrailChange(e) {
-    const newOptions = update(this.state.options, {
-      trailSize: { $set: e.target.value }
-    })
-
+  reset() {
     this.setState({
-      options: newOptions
+      circlePosition: [[Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]],
+      bgColor: this.getRandomColor(),
+      obstacles: [],
+      counter: 0,
+      gameover: false
     })
   }
 
@@ -194,39 +250,28 @@ class App extends Component {
               <div className="counter"><h3>Score: {counter}</h3></div>
               <div className={classnames("board", gameover && "gameover")}>
                 {gameover && (
-                <div className="gameover-text">
+                <div className="gameover-text d-flex flex-column">
                   <h1>GAME OVER</h1>
+                  <button onClick={this.reset}>Restart</button>
                 </div>
                 )}
                 {squares}
               </div>
             </div>
-            <div className="col-4">
               <div className="row">
                 <div className="col-12">
-                  <label>Number of obstacles</label>{' '}
-                  <select onChange={this.handleObstaclesChange} defaultValue={options.numObstacles}>
-                    {obstacleOptions.map(option => {
-                      return option
-                    })}
-                  </select>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-12">
-                  <label>Trail length</label>{' '}
-                  <select onChange={this.handleTrailChange} defaultValue={options.trailSize}>
-                    {trailOptions.map(option => {
-                      return option
-                    })}
+                  <label>Difficulty</label>
+                  <select onChange={this.handleDifficultyChange} defaultValue={options.difficulty} disabled={counter > 0}>
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+                    <option>Insane</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }
