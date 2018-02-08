@@ -12,7 +12,7 @@ class App extends Component {
       obstacles: [],
       counter: 0,
       options: {
-        trailSize: 5,
+        trailSize: 7,
         numObstacles: 25
       },
       gameover: false
@@ -21,6 +21,7 @@ class App extends Component {
     this.handleSquareClick = this.handleSquareClick.bind(this)
     this.getValidMoves = this.getValidMoves.bind(this)
     this.handleObstaclesChange = this.handleObstaclesChange.bind(this)
+    this.handleTrailChange = this.handleTrailChange.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
