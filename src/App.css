@@ -1,38 +1,62 @@
 .App {
-  text-align: center;
-  min-height: 100vh;
-}
+  min-height: 100vh; }
+  .App .board {
+    width: 700px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative; }
+    .App .board .square {
+      width: 100%;
+      height: 100%;
+      padding: 10%; }
+      .App .board .square.black {
+        background: #cdcdcd; }
+      .App .board .square.valid-move {
+        animation-name: highlightValidMove;
+        animation-duration: 1s;
+        animation-iteration-count: infinite; }
+    .App .board.gameover {
+      background: rgba(255, 0, 0, 0.2); }
+    .App .board .circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%; }
+    .App .board .obstacle {
+      background: #ff0000;
+      width: 100%;
+      height: 100%; }
+      .App .board .obstacle.destroy-next {
+        animation-name: destroyObstacle;
+        animation-duration: .2s;
+        animation-iteration-count: infinite; }
+    .App .board .gameover-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .App .board .gameover-text h1 {
+        background: #fff;
+        padding: 10px;
+        text-align: center; }
 
-.App .board {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  flex-wrap: wrap;
-}
+@keyframes destroyObstacle {
+  0% {
+    transform: rotateZ(5deg);
+    opacity: .5; }
+  50% {
+    transform: rotateZ(-5deg);
+    opacity: .75; }
+  100% {
+    transform: rotateZ(5deg);
+    opacity: .5; } }
 
-.square {
-  width: 100%;
-  height: 100%;
-  padding: 10%;
-}
-
-.square.black {
-  background: #000;
-}
-
-.square.clicked {
-  background: #00FF00;
-}
-
-.circle {
-  background: #00FF00;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
-.obstacle {
-  background: #ff0000;
-  width: 100%;
-  height: 100%;
-}
+@keyframes highlightValidMove {
+  0% {
+    background: rgba(0, 255, 0, 0.75); }
+  50% {
+    background: rgba(0, 255, 0, 0.25); }
+  100% {
+    background: rgba(0, 255, 0, 0.75); } }

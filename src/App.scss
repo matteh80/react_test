@@ -1,0 +1,76 @@
+.App {
+  min-height: 100vh;
+
+  .board {
+    width: 700px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+
+    .square {
+      width: 100%;
+      height: 100%;
+      padding: 10%;
+
+      &.black {
+        background: #cdcdcd;
+      }
+      
+      &.valid-move {
+        animation-name: highlightValidMove;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+    }
+
+    &.gameover {
+      background: rgba(255,0,0,0.2);
+    }
+
+    .circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .obstacle {
+      background: #ff0000;
+      width: 100%;
+      height: 100%;
+
+      &.destroy-next {
+        animation-name: destroyObstacle;
+        animation-duration: .2s;
+        animation-iteration-count: infinite;
+      }
+    }
+
+    .gameover-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@keyframes destroyObstacle {
+  0% { transform: rotateZ(5deg); opacity: .5;}
+  50% { transform: rotateZ(-5deg); opacity: .75;}
+  100% { transform: rotateZ(5deg); opacity: .5;}
+}
+
+@keyframes highlightValidMove {
+  0% { background: rgba(0,255,0,.75) }
+  50% { background: rgba(0,255,0,.25) }
+  100% { background: rgba(0,255,0,.75) }
+}
