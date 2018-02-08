@@ -171,7 +171,7 @@ class App extends Component {
       </div>
     )
   }
-  
+
   handleDifficultyChange(e) {
     let level = e.target.value
     let newOptions
@@ -200,7 +200,7 @@ class App extends Component {
       case 'Insane':
         newOptions = {
           difficulty: level,
-          numObstacles: 27,
+          numObstacles: 25,
           trailSize: 11
         }
         break
